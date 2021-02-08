@@ -45,7 +45,7 @@ const SignUp = () => {
     <div className="sign-up">
       <h2>I do not have account</h2>
       <span className="title">Sign up with your email and password</span>
-      <form>
+      <form className="sign-up-form" onSubmit={handleSubmit}>
         <FormInput
           type="text"
           name="displayName"
@@ -78,7 +78,7 @@ const SignUp = () => {
           onChange={handleChange}
           required
         />
-        <CustomButton onClick={handleSubmit}>Sign up</CustomButton>
+        <CustomButton type="submit">Sign up</CustomButton>
       </form>
     </div>
   );

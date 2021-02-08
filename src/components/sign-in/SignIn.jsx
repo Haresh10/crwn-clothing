@@ -10,7 +10,11 @@ const SignIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { email, password } = currentUser;
-    await auth.signInWithEmailAndPassword(email, password);
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+    } catch (error) {
+      console.log(error);
+    }
     setCurrentUser({ email: "", password: "" });
   };
 
@@ -20,7 +24,7 @@ const SignIn = () => {
   };
   const { email, password } = currentUser;
   return (
-    <div className="sign-in">
+    <div onSubmit={handleSubmit}>
       <h2>I already have an account</h2>
       <span className="title">Sign in with your email and password</span>
       <form>
@@ -41,8 +45,12 @@ const SignIn = () => {
           required
         />
         <div className="buttons">
-          <CustomButton onClick={handleSubmit}>Sign in</CustomButton>
-          <CustomButton onClick={signInwithGoogle} isGoogleSignIn={true}>
+          <CustomButton type="submit">Sign in</CustomButton>
+          <CustomButton
+            type="button"
+            onClick={signInwithGoogle}
+            isGoogleSignIn={true}
+          >
             Sign In With Google
           </CustomButton>
         </div>

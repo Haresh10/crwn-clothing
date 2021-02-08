@@ -7,9 +7,11 @@ import ShopPage from "./pages/shop/ShopPage";
 import Header from "./components/header/Header";
 import SignInAndSignUp from "./pages/sign-in-and-sign-up/SignInAndSignUp";
 import { auth, createUserOnFirebase } from "./firebase/firebase.config";
+import { connect } from "react-redux";
+import { setCurrentUser } from "./redux/user/userAction";
 
-function App() {
-  const [currentUser, setCurrentUser] = useState(null);
+function App(props) {
+  const { setCurrentUser } = props;
   useEffect(() => {
     const unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
@@ -24,7 +26,7 @@ function App() {
   }, []);
   return (
     <div>
-      <Header currentUser={currentUser} />
+      <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/shop" component={ShopPage} />
@@ -34,5 +36,7 @@ function App() {
     </div>
   );
 }
-
-export default App;
+const mapDistpatchToProps = (dispatch) => ({
+  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+});
+export default connect(null, mapDistpatchToProps)(App);
