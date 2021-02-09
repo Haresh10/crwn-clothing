@@ -9,6 +9,7 @@ import SignInAndSignUp from "./pages/sign-in-and-sign-up/SignInAndSignUp";
 import { auth, createUserOnFirebase } from "./firebase/firebase.config";
 import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/userAction";
+import { SelectCurrentUser } from "./redux/user/user.selectors";
 
 function App(props) {
   const { setCurrentUser, currentUser } = props;
@@ -42,8 +43,8 @@ function App(props) {
     </div>
   );
 }
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser,
+const mapStateToProps = (state) => ({
+  currentUser: SelectCurrentUser(state),
 });
 const mapDistpatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
