@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/userAction";
 import { SelectCurrentUser } from "./redux/user/user.selectors";
 import CheckoutPage from "./pages/checkout/CheckoutPage";
+import CollectionPage from "./pages/collection/CollectionPage";
 
 function App(props) {
   const { setCurrentUser, currentUser } = props;
@@ -32,6 +33,7 @@ function App(props) {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/shop" component={ShopPage} />
+        <Route path="/shop/:collectionId" component={CollectionPage} />
         <Route
           exact
           path="/login"
