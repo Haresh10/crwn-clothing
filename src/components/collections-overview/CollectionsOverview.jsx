@@ -5,7 +5,7 @@ import "./collections-overview.scss";
 import CollectionPreview from "../../components/collection-preview/CollectionPreview";
 import { selectCollectionsArray } from "../../redux/shop/shop.selectors";
 
-const CollectionsOverview = ({ collections, match }) => {
+const CollectionsOverview = ({ collections }) => {
   return (
     <div className="shop-page">
       {collections.map(({ id, ...otherCollectionProps }) => (

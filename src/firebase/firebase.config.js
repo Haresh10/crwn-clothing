@@ -17,9 +17,9 @@ export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
 //Create an instance of the Google provider object
-const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({ prompt: "select_account" });
-export const signInwithGoogle = () => auth.signInWithPopup(provider);
+export const googleProvider = new firebase.auth.GoogleAuthProvider();
+googleProvider.setCustomParameters({ prompt: "select_account" });
+//export const signInwithGoogle = () => auth.signInWithPopup(googleProvider);
 
 // Create User object in Firebase
 export const createUserOnFirebase = async (userAuth, ...otherProps) => {
@@ -70,5 +70,14 @@ export const convertCollectionsSnapshotToMap = (collections) => {
     accumalator[collection.title.toLowerCase()] = collection;
     return accumalator;
   }, {});
+};
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unSubscribe = auth.onAuthStateChanged((userAuth) => {
+      unSubscribe();
+      resolve(userAuth);
+    }, reject);
+  });
 };
 export default firebase;
